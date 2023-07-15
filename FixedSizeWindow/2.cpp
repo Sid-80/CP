@@ -6,7 +6,7 @@ using namespace std;
 
 int main(int argc, char const *argv[])
 {
-     int max = INT_MIN;
+    int max = INT_MIN;
     int N;
     cout<<"Enter size : ";cin>>N;
     int arr[N];

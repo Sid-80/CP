@@ -45,20 +45,20 @@ int main(int argc, char const *argv[])
             {
                 m1[txt[j]]--;
                 if (m1[txt[j]] == 0)
-                {
-                    count -= 1;
-                }
-                if (count == 0)
-                    ans += 1;
+                    count--;
             }
             j++;
         }
         else if ((j - i + 1) == pat.length())
             {
+                if(count == 0)
+                    ans++;
+
                 if(m1.find(txt[i]) != m1.end()){
                     m1[txt[i]]++;
-                    count += 1;
                 }
+                if(m1[txt[i]] == 1)
+                    count++;
                 i++;
             }
         
