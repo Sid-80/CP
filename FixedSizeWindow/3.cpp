@@ -50,18 +50,18 @@ int main(int argc, char const *argv[])
             j++;
         }
         else if ((j - i + 1) == pat.length())
-            {
-                if(count == 0)
-                    ans++;
+        {
+            if (count == 0)
+                ans++;
 
-                if(m1.find(txt[i]) != m1.end()){
-                    m1[txt[i]]++;
-                }
-                if(m1[txt[i]] == 1)
-                    count++;
-                i++;
+            if (m1.find(txt[i]) != m1.end())
+            {
+                m1[txt[i]]++;
             }
-        
+            if (m1[txt[i]] == 1)
+                count++;
+            i++;
+        }
     }
     cout << ans << endl;
     return 0;
