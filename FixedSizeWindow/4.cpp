@@ -23,7 +23,40 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+class Solution {
+public:
+    vector<int> maxSlidingWindow(vector<int>& nums, int k) {
+        deque<int> dq;
+        vector<int> ans;
 
+        for(int i = 0; i < k;i++){
+            while(dq.size() > 0 && dq.back()<nums[i])
+                dq.pop_back();
+            
+            dq.push_back(nums[i]);
+        }
+
+        ans.push_back(dq.front());
+
+        for(int i =k;i < nums.size();i++){
+            int addInd = i;
+            int remInd = i - k;
+
+            while(dq.size() > 0 && dq.back() < nums[addInd])
+                dq.pop_back();
+
+            dq.push_back(nums[addInd]);
+
+            if(dq.front() == nums[remInd]){
+                dq.pop_front();
+            }
+
+            ans.push_back(dq.front());
+        }
+
+        return ans;
+    }
+};
 
 int main(int argc, char const *argv[])
 {
@@ -39,8 +72,6 @@ int main(int argc, char const *argv[])
     int i=0, j=0, k=0;
     int ans[N-K+1];
     list<int> l1;
-
-    bool isComp
 
     while(j < N){
         if((j - i + 1) < K){
