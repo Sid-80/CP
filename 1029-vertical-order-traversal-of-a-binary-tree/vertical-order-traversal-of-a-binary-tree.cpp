@@ -14,8 +14,7 @@ public:
     vector<vector<int>> verticalTraversal(TreeNode* root) {
         map<int, map<int,multiset<int>>> nodes; // <lvl, <hd,valueOfNode>> multiset to get sorted order
         queue<pair<TreeNode*, pair<int,int>>> q1;
-        
-        // if(!root) return ans;
+   
         //consider root at 0 on number line ansd At the start level is 0.
         q1.push(make_pair(root,make_pair(0,0)));
 
