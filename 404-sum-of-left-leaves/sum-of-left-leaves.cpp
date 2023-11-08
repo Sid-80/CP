@@ -10,6 +10,7 @@
  * };
  */
 class Solution {
+    int n = 0;
     void solve(int & ans, TreeNode* root){
         if(root == nullptr) return;
 
@@ -23,8 +24,14 @@ class Solution {
 
 public:
     int sumOfLeftLeaves(TreeNode* root) {
-        int ans = 0;
-        solve(ans,root);
-        return ans;
+        if(root!=NULL){
+           if(root->left!=NULL && root->left->left==NULL  
+           && root->left->right==NULL){
+               n +=root->left->val;
+           }
+            sumOfLeftLeaves(root->left);
+            sumOfLeftLeaves(root->right);
+       }
+        return n;
     }
 };
