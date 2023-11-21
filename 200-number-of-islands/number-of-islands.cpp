@@ -1,5 +1,25 @@
 class Solution {
 
+
+    void dfs(int row,int col,vector<vector<int>>& vis, vector<vector<char>>& grid,int n,int m){
+        if(row<0 || col<0 || row>=n || col>=m){
+            return;
+        }
+        if(grid[row][col]=='0' || vis[row][col]==1){
+            return;
+        }
+
+        vis[row][col]=1;
+        dfs(row,col+1,vis,grid,n,m);
+        dfs(row,col-1,vis,grid,n,m);
+        dfs(row-1,col,vis,grid,n,m);
+        dfs(row+1,col,vis,grid,n,m);
+        
+        
+
+        
+    }
+
     void bfs(int row, int col, vector<vector<int>> & vis, vector<vector<char>> grid,int n, int m){
         vis[row][col] = 1;
         queue<pair<int,int>> q1;
@@ -40,7 +60,7 @@ public:
             for(int j = 0; j < m;j++){
                 if(!vis[i][j] && grid[i][j] == '1'){
                     cnt++;
-                    bfs(i,j,vis,grid,n,m);
+                    dfs(i,j,vis,grid,n,m);
                     
                 }
             }
