@@ -1,44 +1,44 @@
 class Solution
 {
 
-    bool checkBFS(vector<vector<int>> &graph, int i)
-    {
-        int len = graph.size();
-        int arr[len];
+    // bool checkBFS(vector<vector<int>> &graph, int i)
+    // {
+    //     int len = graph.size();
+    //     int arr[len];
 
-        for (int i = 0; i < len; i++)
-        {
-            arr[i] = -1;
-        }
+    //     for (int i = 0; i < len; i++)
+    //     {
+    //         arr[i] = -1;
+    //     }
 
-        queue<int> q1;
+    //     queue<int> q1;
 
-        q1.push(i);
+    //     q1.push(i);
 
-        arr[i] = 0;
+    //     arr[i] = 0;
 
-        while (!q1.empty())
-        {
-            int index = q1.front();
-            q1.pop();
+    //     while (!q1.empty())
+    //     {
+    //         int index = q1.front();
+    //         q1.pop();
 
-            for (auto it : graph[index])
-            {
+    //         for (auto it : graph[index])
+    //         {
 
-                if (arr[it] == arr[index])
-                {
-                    return false;
-                }
-                else if (arr[it] == -1)
-                {
-                    arr[it] = !arr[index];
-                    q1.push(it);
-                }
-            }
-        }
+    //             if (arr[it] == arr[index])
+    //             {
+    //                 return false;
+    //             }
+    //             else if (arr[it] == -1)
+    //             {
+    //                 arr[it] = !arr[index];
+    //                 q1.push(it);
+    //             }
+    //         }
+    //     }
 
-        return true;
-    }
+    //     return true;
+    // }
 
     bool checkDFS(int node, int arr[], vector<vector<int>> graph, int color){
       arr[node] = color;
