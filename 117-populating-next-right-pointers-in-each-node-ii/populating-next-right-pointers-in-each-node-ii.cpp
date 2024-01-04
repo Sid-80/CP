@@ -22,36 +22,29 @@ public:
 
         if(!root) return root;
 
-        queue<Node*> q;
-        q.push(root);
+        queue<pair<int,Node*>> q;
+        q.push({1,root});
 
         while(!q.empty()){
 
-            int n = q.size();
+            int curlvl = q.front().first;
+            Node* front = q.front().second;
+            q.pop();
+            
+            Node* newNext = q.front().second;
+            int nextlvl = q.front().first;
 
-            while(n--){
-                auto front = q.front();
-                q.pop();
-
-                if(n == 0){ 
-                    front->next = NULL;
-                }
-                else{
-                    front->next = q.front();
-                }
-
-                if(front->left != nullptr){
-                    q.push( front->left);
-                }
-
-                if(front->right != nullptr ){
-                    q.push(front->right);
-                }
-
-                
+            if(curlvl == nextlvl){
+                front->next = newNext;
             }
 
-           
+            if(front->left != nullptr && front){
+                q.push({curlvl + 1, front->left});
+            }
+
+            if(front->right != nullptr && front){
+                q.push({curlvl + 1, front->right});
+            }
         }
 
         return root;
