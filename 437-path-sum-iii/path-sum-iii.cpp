@@ -12,19 +12,35 @@
 class Solution {
     int ans = 0;
 
-    int dfs(TreeNode* root,int targetSum, long long sum){
-        if(root == NULL) return 0 ;
+    void dfs2(TreeNode* root,int targetSum, long long sum){
+        if(root == NULL) return;
 
-        sum += root->val;
+        sum+=root->val;
 
-        return (sum == targetSum) + dfs(root->left,targetSum,sum) + dfs(root->right,targetSum,sum);
+        if(sum == targetSum){
+            ans++;
+        }
+
+        dfs2(root->left,targetSum,sum);
+        dfs2(root->right,targetSum,sum);
+        sum-=root->val;
+
+    }
+
+    void dfs1(TreeNode* root, int targetSum){
+        if(root == NULL) return;
+
+        
+        dfs1(root->left,targetSum);
+        dfs1(root->right,targetSum);
+
+        dfs2(root,targetSum,0);
 
     }
 
 public:
     int pathSum(TreeNode* root, int targetSum) {
-        if(root == NULL) return 0;
-    
-        return dfs(root,targetSum,0) + pathSum(root->left,targetSum) + pathSum(root->right,targetSum);
+        dfs1(root,targetSum);
+        return ans;
     }
 };
