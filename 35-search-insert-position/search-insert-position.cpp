@@ -11,11 +11,7 @@ public:
             else if(nums[mid] > target){
                 high = mid - 1;
             }else{
-                if(nums[mid] < target && low == nums.size() - 1 && high == nums.size() - 1){
-                    ans = mid + 1;
-                }else{
-                    ans = mid + 1;
-                }
+                ans = mid + 1;
                 low = mid + 1;
             }
 
