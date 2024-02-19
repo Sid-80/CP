@@ -1,26 +1,26 @@
 class Solution {
 public:
     int searchInsert(vector<int>& nums, int target) {
-        int start = 0, end = nums.size();
+        int low = 0, high = nums.size() - 1;
+        int ans = 0;
 
-        if(nums[end-1] < target){
-            return end;
-        }
+        while(low <= high){
+            int mid = (low+high)/2;
 
-        while(start <= end){
-            int i = (start + end) / 2;
-        
-            if(nums[i] == target){
-                return i;
-            }else if(nums[i] < target){
-                start = i+1;
-            }else if(nums[i] > target){
-                end = i -1;
+            if(nums[mid] == target) return mid;
+            else if(nums[mid] > target){
+                high = mid - 1;
+            }else{
+                if(nums[mid] < target && low == nums.size() - 1 && high == nums.size() - 1){
+                    ans = mid + 1;
+                }else{
+                    ans = mid + 1;
+                }
+                low = mid + 1;
             }
 
         }
 
-        return start;
-
+        return ans;
     }
 };
