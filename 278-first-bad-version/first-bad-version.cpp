@@ -7,10 +7,8 @@ public:
         long high = n, low = 1;
 
         long ans = n;
-
         while(low <= high){
             long mid = (low + high)/2;
-            cout<<mid<<" ";
 
             bool res = isBadVersion(mid);
 
