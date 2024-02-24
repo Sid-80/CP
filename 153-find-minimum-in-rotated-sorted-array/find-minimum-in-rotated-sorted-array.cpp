@@ -19,10 +19,9 @@ public:
                 }
             }else{
                 if(nums[mid] <= nums[high]){
-                    // e.g - [11,13,15,17]
+                    // e.g - [5,1,2,3,4]
                     high = mid - 1;
                 }else{
-                    // e.g - [4,5,6,7,0,1,2]
                     low = mid + 1;
                 }
             }
