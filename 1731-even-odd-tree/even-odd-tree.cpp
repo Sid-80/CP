@@ -45,8 +45,6 @@ public:
                         return false;
                     }
                 }else{//even
-                    cout<<front->val<<endl;
-                    
 
                     if(front->val%2 != 0 || front->val >= prev){
                         return false;
