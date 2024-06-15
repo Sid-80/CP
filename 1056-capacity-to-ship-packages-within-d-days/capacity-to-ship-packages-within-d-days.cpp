@@ -1,43 +1,40 @@
-class Solution {
+// Here we will take low as highest weight in array and high as sum of weights
 
-    bool check(vector<int> w, int days, int cap){
-        int sum=0;
-        int ans=1;
-        for(auto x: w){
-            sum+=x;
-            if(x>cap){
-                return false;
+class Solution {
+    bool possible(vector<int>& arr, int shipWeight, int days){
+        int sum = 0, temp = 1;
+
+        for(int i = 0; i < arr.size();i++){
+            if((sum+arr[i]) > shipWeight){
+                temp++;
+                sum = 0;
             }
-            if(sum>cap){
-                ans++;
-                sum=x;
-            }
+            sum += arr[i];
         }
-        if(ans<=days){
-            return true;
-        }
-        return false;
+
+        return temp <= days;
     }
 
 public:
-    int shipWithinDays(vector<int>& weights, int days) {
-        int l = 1, h = 0;
+    int shipWithinDays(vector<int>& arr, int days) {
+        int high = 0;
+        int low = INT_MIN;
 
-        for(auto it: weights){
-            h += it;
+        for(auto it : arr){
+            high += it;
+            low = max(low,it);
         }
 
-        while(l <= h){
-            int m = (l + h)/2;
+        while(low <= high){
+            int mid = (low+high)/2;
 
-            if(check(weights,days,m)){
-                h = m - 1;
+            if(possible(arr,mid,days)){
+                high = mid-1;
             }else{
-                l = m + 1;
+                low = mid + 1;
             }
-
         }
 
-        return l;
+        return low;
     }
 };
