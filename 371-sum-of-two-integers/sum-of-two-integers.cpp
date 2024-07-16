@@ -6,9 +6,6 @@ public:
         c = (a&b);
         a = a ^ b;
         b = (c)<<1;
-
-        cout<<c<<" "<<b<<" "<<a<<endl;
-
       }
       return a;
     }
