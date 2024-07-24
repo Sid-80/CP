@@ -3,7 +3,6 @@ class Solution {
     int n;
     int solve(int amount, vector<int>& coins, int idx, vector<vector<int>> & dp){
         if(idx == 0){
-            cout<<amount<<endl;
             return amount % coins[0] == 0;
         }
 
