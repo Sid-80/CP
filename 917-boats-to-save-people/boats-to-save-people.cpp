@@ -7,7 +7,6 @@ public:
         sort(people.begin(),people.end());
 
         while( start <= end){
-            cout<<start<<" "<<end<<endl;
 
             if(people[end] + people[start] > limit){
                 ans++;
