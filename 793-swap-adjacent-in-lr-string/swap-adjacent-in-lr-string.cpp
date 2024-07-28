@@ -5,7 +5,6 @@ public:
         while(i < n || j < m) {
             while(s[i] == 'X') i++;
             while(e[j] == 'X') j++;
-            cout<<i<<" "<<j<<endl;
             if(s[i] != e[j]) return false;
             if(s[i] == 'R' && i > j) return false;
             if(s[i] == 'L' && i < j) return false; 
