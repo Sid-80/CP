@@ -1,28 +1,41 @@
 class Solution {
 public:
-    int longestMountain(vector<int>& arr) {
-        int n = arr.size();
+    vector<int> LIS(vector<int> & arr, int n){
+        vector<int> dp(n,1);
         
-        int max_length = 0;
-        for(int i=1;i<n-1;i++)
-        {
-            if((arr[i] > arr[i-1]) && (arr[i] > arr[i+1])) //PEAK CONDITION
-            {
-                int start_root = i;
-                int end_root = i;
-                while( start_root>0 && arr[start_root] > arr[start_root-1])
-                {
-                    start_root--; //getting start root
-                    
-                }
-                while( end_root<n-1 && arr[end_root] > arr[end_root+1] )
-                {
-                    end_root++; //getting end root
-                }
-                max_length = max(max_length,(end_root-start_root+1));
-                i = end_root;
+        for(int i = 1;i < n;i++){
+            if(arr[i] > arr[i - 1]){
+               dp[i] = 1 + dp[i-1];
             }
         }
-        return max_length;
+        return dp;
+    }
+
+    int longestMountain(vector<int>& arr) {
+        int n = arr.size();
+
+        vector<int> dp1(n, 1); 
+        vector<int> dp2(n, 1);
+        int ans = 0; // Variable to store the maximum length of a mountain sequence
+
+        // Calculate the length of the increasing subsequence ending at each index
+        for (int ind = 1; ind < n; ind++) {
+            if (arr[ind] > arr[ind - 1]) {
+                // If the element at the current index is greater than the previous element,
+                // we can extend the increasing subsequence. Increment dp[ind] by 1.
+                dp1[ind] = 1 + dp1[ind - 1];
+            }
+        }
+
+        for (int ind = n - 2; ind >= 0; ind--) {
+            if (arr[ind] > arr[ind + 1]) {
+                dp2[ind] = 1 + dp2[ind + 1];
+            }
+        }
+
+        for(int i = 0;i < n;i++){
+            if(dp1[i] > 1 && dp2[i] > 1) ans = max(ans, dp1[i] + dp2[i] - 1 );
+        }
+        return ans;
     }
 };
