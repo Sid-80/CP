@@ -19,19 +19,33 @@ public:
     int lengthOfLIS(vector<int>& nums) {
         int n = nums.size();
 
-        vector<int> next(n+1, 0), curr (n+1,0);
+        // vector<int> next(n+1, 0), curr (n+1,0);
 
-        for (int ind = n - 1; ind >= 0; ind--) {
-            for (int prev = ind - 1; prev >= -1; prev--) {
-                int len = next[prev+1];
-                if (prev == -1 || nums[ind] > nums[prev]) {
-                    len = std::max(len, 1 + next[ind + 1]);
+        // for (int ind = n - 1; ind >= 0; ind--) {
+        //     for (int prev = ind - 1; prev >= -1; prev--) {
+        //         int len = next[prev+1];
+        //         if (prev == -1 || nums[ind] > nums[prev]) {
+        //             len = std::max(len, 1 + next[ind + 1]);
+        //         }
+        //         curr[prev + 1] = len;
+        //     }
+        //     next = curr;
+        // }
+
+        // return next[0];
+
+        vector<int> dp(n,1);
+        int ans = 1;
+
+        for(int i = 0;i < n;i++){
+            for(int j = 0; j < i;j++){
+                if(nums[i] > nums[j]){
+                    dp[i] = max(dp[i], dp[j] + 1);
+                    ans = max(ans,dp[i]);
                 }
-                curr[prev + 1] = len;
             }
-            next = curr;
         }
 
-        return next[0];
+        return ans;
     }
 };
