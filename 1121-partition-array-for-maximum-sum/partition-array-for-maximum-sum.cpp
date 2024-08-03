@@ -1,26 +1,24 @@
 class Solution {
 public:
-vector<int> dp;
-int fun(int idx,vector<int>& arr,int k){
-    
-    if(dp[idx] != -1)
-        return dp[idx];
-    
-    int m = -1, sum = 0;
-    
-    for(int i = 0; i < k; i++){
-        if(i+idx >= arr.size())
-            continue;
-        
-        m = max(m,arr[i+idx]);
-        sum = max(sum, (m*(i+1)) + fun(idx+i+1,arr,k));
+    int n;
+    int solve(int i, vector<int> & arr, int k, vector<int> & dp){
+        if(n == i) return 0;
+
+        if(dp[i] != -1) return dp[i];
+
+        int ans = 0 , maxi = INT_MIN;
+
+        for(int j = i;j < i + k && j < n;j++){
+            maxi = max(arr[j],maxi);
+            ans = max(ans, maxi * (j - i + 1) + solve(j+1,arr,k,dp));
+        }
+
+        return dp[i] = ans;
     }
-    
-    return dp[idx] = sum;
-}
-int maxSumAfterPartitioning(vector<int>& arr, int k) {
-    
-    dp = vector<int> (arr.size()+1,-1);
-    return fun(0,arr,k);
-}
+    int maxSumAfterPartitioning(vector<int>& arr, int k) {
+        n = arr.size();
+        vector<int> dp(n+1,-1);
+
+        return solve(0,arr,k,dp);
+    }
 };
