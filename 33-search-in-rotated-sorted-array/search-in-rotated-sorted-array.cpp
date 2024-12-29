@@ -9,7 +9,7 @@ public:
             if(nums[mid] == target){
                 return mid;
             }
-            // Here from mid either left will be sorted or right
+            
             if(nums[low] <= nums[mid]){
                 if(nums[low] <= target && target <= nums[mid]){
                     high = mid - 1;
