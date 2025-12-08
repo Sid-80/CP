@@ -1,15 +1,19 @@
 class Solution {
+
 public:
-    int hammingWeight(int n) {
+
+        int get1s(int x){
         int cnt = 0;
 
-        while(n > 1){
-            if((n & 1) == 1){
-                cnt++;
-            }
-            n = n >> 1;
+        while(x > 0){
+            x = x & (x-1);
+            cnt++;
         }
 
-        return (n == 1) ? cnt+1 : cnt;
+        return cnt;
+    }
+
+    int hammingWeight(int n) {
+        return get1s(n);
     }
 };
