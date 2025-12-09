@@ -1,18 +1,15 @@
 class Solution {
 public:
-    int minBitFlips(int start, int goal) {
-        int ans = start ^ goal;
-
-        int cnt = 0;
-
-        while(ans > 1){
-            if((ans & 1) == 1){
-                cnt++;
+    int minBitFlips(int x, int y) {
+        int ans = 0;
+        for(int i = 0;i < 32;i++){
+            if((((x >> i) & 1) == 0) && (((y >> i) & 1) != 0) ){
+                ans +=1;
+            } else if((((x >> i) & 1) != 0) && (((y >> i) & 1) == 0) ){
+                ans += 1;
             }
-            ans = ans >> 1;
         }
 
-        return (ans == 1) ? cnt + 1 : cnt;
-
+        return ans;
     }
 };
