@@ -13,9 +13,7 @@ public:
         int len=n, sumP=0;
         for(int i=0; i<n; i++){
             sumP=(sumP+nums[i])%p;
-            int y=(sumP-modP+p)%p;
-
-            // cout<<sumP<<" "<<y<<endl;
+            int y=(sumP-modP+p)%p; // we are removing subarray using modp and then adding p to get rid of 0 and then again checking divisibility
 
             if (pos.count(y))
                 len=min(len, i-pos[y]);
