@@ -35,7 +35,7 @@ public:
                     q.push(node->right);
                     visited[node->right]=true;
                 }
-                if(parent[node] && !visited[parent[node]])//important here
+                if(parent[node] && !visited[parent[node]])
                 {
                     q.push(parent[node]);
                     visited[parent[node]]=true;
@@ -55,7 +55,7 @@ public:
         queue<TreeNode*>q;
         q.push(root);
         while(q.size()!=0)
-        {   //going level was not necessary just did it for my continuity
+        {
             int size=q.size();
             for(int i=0;i<size;i++)
             {
