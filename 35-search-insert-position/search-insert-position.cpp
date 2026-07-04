@@ -1,22 +1,10 @@
 class Solution {
 public:
     int searchInsert(vector<int>& nums, int target) {
-        int low = 0, high = nums.size() - 1;
-        int ans = 0;
+        int n = nums.size();
 
-        while(low <= high){
-            int mid = (low+high)/2;
+        auto tmp = lower_bound(nums.begin(), nums.end(), target);
 
-            if(nums[mid] == target) return mid;
-            else if(nums[mid] > target){
-                high = mid - 1;
-            }else{
-                ans = mid + 1;
-                low = mid + 1;
-            }
-
-        }
-
-        return ans;
+        return (tmp - nums.begin());
     }
 };
