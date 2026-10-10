@@ -1,31 +1,45 @@
 class Solution {
 public:
     int countSubstrings(string s) {
-        int n = s.length();
-        vector<vector<bool>> palindrome(n, vector<bool>(n, false));
-        int ans = 0;
+        int n = s.size(), ans = 0;
 
-        // single char substring
-        for (int i = 0; i < n; ++i) {
-            palindrome[i][i] = true;
+        vector<vector<int>> dp(n + 1, vector<int> (n + 1, 0));
+
+
+        for(int i = 0; i< n;i++){
+            dp[i][i] = 1;
             ans++;
         }
 
-        //2 char substrings
-        for (int i = 0; i < n - 1; ++i) {
-            if (s[i] == s[i + 1]) {
-                palindrome[i][i + 1] = true;
+        int i = 0;
+
+        while(i < n-1){
+            if(s[i] == s[i+1]){
+                dp[i][i+1] = 1;
                 ans++;
+            } else {
+                dp[i][i+1] = 0;
             }
+            i++;
         }
-        //more than 2 char substrings
-        for (int len = 3; len <= n; ++len) {
-            for (int i = 0; i < n - len + 1; ++i) {
-                if (s[i] == s[i + len - 1] && palindrome[i + 1][i + len - 2]) {
-                    palindrome[i][i + len - 1] = true;
+
+        int length = 3;
+
+        while(length <= n){
+            i = 0;
+            while(i < n-length+1){
+                int j = i + length - 1;
+                
+                if(s[i] == s[j] && dp[i+1][j-1] == 1){
+                    dp[i][j] = 1;
                     ans++;
+                } else {
+                    dp[i][j] = 0;
                 }
+                i++;
+
             }
+            length++;
         }
 
         return ans;
