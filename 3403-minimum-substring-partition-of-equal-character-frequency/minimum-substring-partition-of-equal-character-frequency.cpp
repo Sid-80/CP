@@ -1,57 +1,28 @@
-bool check(vector <int> & b){
-    
-    
-    int c1 = 0 ; 
-    for(int i=0;i<26;i++){
-        if(b[i]>=1){
-            if(c1==0){
-            c1 = b[i];
-            }
-            
-            if(b[i]==c1){
-                
-            }
-            else {
-                return false;
-            }   
-        }
-    }
-    
-    return true;
-}
-
-
-
-
 class Solution {
 public:
+    bool checkIsBalanced(unordered_map<char,int>& mp) {
+        int t = -1;
+        for (auto& it : mp) {
+            if (t == -1) t = it.second;
+            if (it.second != t) return false;
+        }
+        return true;
+    }
+
     int minimumSubstringsInPartition(string s) {
         int n = s.size();
-        vector <int> dp(n+5,0);
-        string g = ".";
-        g=g+s;
-        //cout<<g;
-        dp[1]=1;
-        for(int i=2;i<=n;i++){
-            int v = 100000 ;
-            vector <int> b(26,0);
-            for(int j=i;j>=1;j--){
-                
-                char u = g[j]; //RRRRR
-                int y = int(u)-97;
-                b[y]++;
-                                
-                if(check(b)==true){
-                     v = min(v,1+dp[j-1]);
+        vector<int> dp(n + 1, 1e9);
+        dp[0] = 0;
+
+        for (int i = 1; i <= n; i++) {
+            unordered_map<char,int> mp;
+            for (int j = i; j >= 1; j--) {
+                mp[s[j-1]]++;
+                if (checkIsBalanced(mp)) {
+                    dp[i] = min(dp[i], dp[j-1] + 1);
                 }
-                
             }
-            dp[i]=v;
-            //cout<<dp[i];
-            //cout<<"\n";
         }
-        
         return dp[n];
-        
     }
 };
